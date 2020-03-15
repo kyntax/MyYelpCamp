@@ -1,14 +1,14 @@
 //SETUP
-const express           = require("express");
-const app               = express();
-const bodyParser        = require("body-parser");
-const mongoose          = require("mongoose");
-const flash             = require("connect-flash");
-const passport          = require("passport");
-const LocalStrategy     = require("passport-local")
-const methodOverride    = require("method-override")
-const User              = require("./models/user");
-const seedDB            = require("./seed.js")
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local")
+const methodOverride = require("method-override")
+const User = require("./models/user");
+const seedDB = require("./seed.js")
 
 const campgroundRoutes = require("./routes/campgrounds");
 const commentRoutes = require("./routes/comments");
@@ -49,6 +49,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, process.env.IP, () => {
     console.log("Server is running at port 5000");
 })

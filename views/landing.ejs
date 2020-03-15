@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css">
+    <title>Yelp Camp</title>
+</head>
+
+<body>
+    <div class="container">
+        <% if(error && error.length >0){%>
+        <div class="alert alert-danger" role="alert"><%=error%></div>
+        <% } %>
+        <% if(success && success.length >0){%>
+        <div class="alert alert-success" role="alert"><%=success%></div>
+        <% } %>
+
+
+    </div>
+    <div class="container">
+        <div id="landing-header">
+            <h1>Welcome to YELP CAMP</h1>
+            <a href="/campgrounds" class="btn btn-success">View all campgrounds</a>
+        </div>
+        <ul class="slideshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <%- include("./partials/footer.ejs") %>

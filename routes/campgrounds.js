@@ -5,15 +5,14 @@ const middleware = require("../middleware")
 // INDEX route - Display campground
 router.get("/", (req, res) => {
     // Get campgrounds from DB, if found => render to the website
-    Campground.find({}, (err, allCampgrounds) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render("campgrounds/index", {
-                campgrounds: allCampgrounds,
-            });
-        }
-    });
+    try{
+        let allCampgrounds = await Campground.find({});
+        res.render("campgrounds/index", {
+            campgrounds: allCampgrounds,
+        });
+    } catch(errs){
+        res.status(422).json({ errors: errs })
+    }
 });
 
 // CREAT route - Add new campgrounds

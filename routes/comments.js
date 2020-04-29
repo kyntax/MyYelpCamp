@@ -19,26 +19,25 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 
 });
 //Comments Create
-router.post("/", middleware.isLoggedIn, async(req, res) => {
-    Campground.findById(req.params.id, (err, foundCampground) => {
-        if (err) {
-            res.redirect("/campgrounds");
+router.post("/", middleware.isLoggedIn, async (req, res) => {
+    try {
+        let foundCampground = await Campground.findById(req.params.id)
+        if (foundCampground) {
+            let comment = await Comment.create(req.body.comment);
+            comment.author.id = req.user._id;
+            comment.author.username = req.user.username;
+            // Save the comments
+            comment.save();
+            foundCampground.comments.push(comment);
+            foundCampground.save();
+            res.redirect("/campgrounds/" + foundCampground._id);
         } else {
-            Comment.create(req.body.comment, (err, comment) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    comment.author.id = req.user._id;
-                    comment.author.username = req.user.username;
-                    // Save the comments
-                    comment.save();
-                    foundCampground.comments.push(comment);
-                    foundCampground.save();
-                    res.redirect("/campgrounds/" + foundCampground._id);
-                }
-            });
+            throw err
         }
-    });
+    }
+    catch (err) {
+        res.redirect("/campgrounds");
+    }
 });
 
 // EDIT - Comment route
@@ -52,7 +51,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => 
             if (err) {
                 res.redirect("back");
             } else {
-                res.render("comments/edit", {campground_id: req.params.id, comment: foundComment });
+                res.render("comments/edit", { campground_id: req.params.id, comment: foundComment });
             }
         });
     })

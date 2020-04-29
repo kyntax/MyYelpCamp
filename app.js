@@ -19,6 +19,8 @@ const indexRoutes = require("./routes/index");
 mongoose.connect("mongodb+srv://admin:hoanglong@cluster0-cffun.azure.mongodb.net/yelp_camp", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(res => console.log("Connected"))
     .catch(err => console.log(err));
+mongoose.set('useFindAndModify', false);
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -51,6 +53,6 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT || 5000, process.env.IP, () => {
-    console.log("Server is running at port 5000");
+app.listen(process.env.PORT || 3000, process.env.IP, () => {
+    console.log(`Server is running at https://localhost:${3000}`);
 })

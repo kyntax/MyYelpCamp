@@ -3,7 +3,7 @@ const router = express.Router();
 const Campground = require("../models/campground");
 const middleware = require("../middleware")
 // INDEX route - Display campground
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     // Get campgrounds from DB, if found => render to the website
     try{
         let allCampgrounds = await Campground.find({});

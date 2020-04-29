@@ -19,7 +19,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 
 });
 //Comments Create
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, async(req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
         if (err) {
             res.redirect("/campgrounds");

@@ -2,7 +2,7 @@
 
 <div class="container">
     <h1 class="text-center m-4">Edit your comment</h1>
-    <form action="/campgrounds/<%=campground_id%>/comments/<%=comment._id%>?_method=PUT" method="post">
+    <form action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=PUT" method="post">
         <div class="form-group row">
             <div class="col-md-12">
                 <textarea class="form-control" name="comment[text]" id="textareaInput"

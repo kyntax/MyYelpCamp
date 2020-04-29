@@ -5,11 +5,13 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const passport = require("passport");
+const logger = require('morgan');
+
 const LocalStrategy = require("passport-local")
 const methodOverride = require("method-override")
+
 const User = require("./models/user");
 const seedDB = require("./seed.js")
-
 const campgroundRoutes = require("./routes/campgrounds");
 const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
@@ -43,7 +45,7 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
-})
+})  
 
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
